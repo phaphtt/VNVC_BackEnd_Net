@@ -18,7 +18,7 @@ namespace BackEnd.Controllers
             //Connect DB:
             Models.MongoDBSettings.ConnectToMongoService();
             var loyal_customer = Models.MongoDBSettings.database.GetCollection<Models.LoyalCustomer>("LoyalCustomer");
-            int length = (int)loyal_customer.Find(s => s.active == true && s.active == false).Count() + 1;
+            int length = (int)loyal_customer.Find(s => s.active == true || s.active == false).Count() + 1;
             customer.active = true;
             customer.create_date = DateTime.Today;
             customer.loyal_customer_id = "LOYALCUSTOMER" + Convert.ToString(length);
