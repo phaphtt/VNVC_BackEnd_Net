@@ -36,23 +36,24 @@ namespace BackEnd.Controllers
 
         //Get: api/cart/getcart/{user_id}
         [HttpGet("getcart/{user_id}")]
-        public IEnumerable<Models.Vaccine> GetCart(string user_id)
+        public IEnumerable<Models.CartItem> GetCart(string user_id)
         {
             //Connect DB:
             ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost");
             IDatabase db = redis.GetDatabase();
             var server = redis.GetServer("localhost", 6379);
-            Models.Vaccine vaccine = new Models.Vaccine();
-            vaccine.active = true;
+            Models.CartItem item = new Models.CartItem();
+            item.active = true;
 
             foreach (var keys in server.Keys(pattern: user_id + ":" + "*"))
             {
-                vaccine.id = db.HashGet(keys, "id").ToString();
-                vaccine.name = db.HashGet(keys, "name").ToString();
-                vaccine.price = (int)db.HashGet(keys, "price");
-                vaccine.function = db.HashGet(keys, "function").ToString();
-                vaccine.description = db.HashGet(keys, "description").ToString();
-                yield return vaccine;
+                item.id = db.HashGet(keys, "id").ToString();
+                item.name = db.HashGet(keys, "name").ToString();
+                item.price = (int)db.HashGet(keys, "price");
+                item.function = db.HashGet(keys, "function").ToString();
+                item.description = db.HashGet(keys, "description").ToString();
+                item.key = keys;
+                yield return item;
             }
         }
     }

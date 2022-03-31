@@ -31,4 +31,9 @@ namespace BackEnd.Models
         [BsonElement("create_date")]
         public DateTime create_date { get; set; }
     }
+
+    public class CartItem : Vaccine
+    {
+        public string key { get; set; }
+    }
 }
