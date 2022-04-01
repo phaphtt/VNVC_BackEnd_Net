@@ -9,10 +9,6 @@ namespace BackEnd.Models
 {
     public class Customer
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string id { get; set; }
-
         [BsonElement("name")]
         public string name { get; set; }
 
