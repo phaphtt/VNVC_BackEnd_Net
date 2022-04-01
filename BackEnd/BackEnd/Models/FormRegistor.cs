@@ -10,7 +10,7 @@ namespace BackEnd.Models
     public class CustomerRegistor
     {
         public Customer customer { get; set; }
-        public List<Vaccine> vaccines { get; set; }
+        public List<CartItem> item { get; set; }
     }
     public class FormRegistor
     {
