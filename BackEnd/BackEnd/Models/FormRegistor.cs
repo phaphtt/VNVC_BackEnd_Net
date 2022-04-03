@@ -29,9 +29,6 @@ namespace BackEnd.Models
         [BsonElement("payment_cccd")]
         public string payment_cccd { get; set; }
 
-        [BsonElement("relationship")]
-        public string relationship { get; set; }
-
         [BsonElement("customer_id")]
         public string customer_id { get; set; }
 
