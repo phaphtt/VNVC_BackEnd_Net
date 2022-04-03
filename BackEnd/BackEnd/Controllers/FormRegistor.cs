@@ -21,10 +21,10 @@ namespace BackEnd.Controllers
             //Connect RedisDB:
             ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost");
             IDatabase db = redis.GetDatabase();
-            //int length = (int)loyal_customer.Find(s => s.active == true || s.active == false).Count() + 1;
+
             Int32 total = 0;
             Int32 length = formRegistor.customers.Count();
-            for (Int32 i = 0 ; i < length; i++)
+            for (Int32 i = 0; i < length; i++)
             {
                 for (Int32 j = 0; j < formRegistor.customers[i].item.Count(); j++)
                 {
@@ -35,7 +35,7 @@ namespace BackEnd.Controllers
             formRegistor.active = true;
             formRegistor.create_date = DateTime.Today;
             formRegistor.total = total;
-            //formRegistor.loyal_customer_id = "LOYALCUSTOMER" + Convert.ToString(length);
+
             form_registor.InsertOne(formRegistor);
             for (Int32 i = 0; i < length; i++)
             {
