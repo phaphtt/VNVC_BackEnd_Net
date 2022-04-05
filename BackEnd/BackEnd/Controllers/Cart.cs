@@ -56,5 +56,21 @@ namespace BackEnd.Controllers
                 yield return item;
             }
         }
+
+        //Delete: api/cart/deleteitem/{key}
+        [HttpDelete("deleteitem/{key}")]
+        public string DeleteItemCart(string key)
+        {
+            //Connect DB:
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost");
+            IDatabase db = redis.GetDatabase();
+            if (db.KeyExists(key))
+            {
+                db.KeyDelete(key);
+                return "Xóa sản phẩm trong giỏ hàng thành công";
+            }
+            else
+                return "Sản phẩm không tồn tại trong giỏ hàng. Xóa sản phẩm trong giỏ hàng thất bại";
+        }
     }
 }
